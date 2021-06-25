@@ -1,0 +1,75 @@
+package Controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Models.Cliente;
+import Models.Endereco;
+
+
+
+
+
+
+/**
+ * Servlet implementation class ControllerConta
+ */
+@WebServlet("/ControllerConta")
+public class ControllerConta extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ControllerConta() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		Cliente cli = new Cliente();
+		Endereco end = new Endereco();
+		
+		cli.setNome_Cliente(request.getParameter("nome"));
+		cli.setCpf(request.getParameter("cpf"));
+		cli.setEmail(request.getParameter("Email"));
+		cli.setSenha(request.getParameter("Senha"));
+		cli.setTelefone(request.getParameter("telefone"));
+		
+		
+		
+		cli.atualizaCliente(cli);
+			
+		
+		RequestDispatcher rd;
+		
+		
+		rd = request.getRequestDispatcher("/Menu.jsp");
+		rd.forward(request, response);
+	}
+		
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
